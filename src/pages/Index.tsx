@@ -1,11 +1,13 @@
 import { useState, useMemo } from "react";
-import { Search, Filter, Info, Network } from "lucide-react";
+import { Search, Info, Network, Map } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import GraphVisualization from "@/components/GraphVisualization";
+import MapVisualization from "@/components/MapVisualization";
 import ChatPanel from "@/components/ChatPanel";
 import NodeDetailPanel from "@/components/NodeDetailPanel";
 import HowItWorksPanel from "@/components/HowItWorksPanel";
@@ -25,6 +27,7 @@ const Index = () => {
   const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
   const [highlightNodes, setHighlightNodes] = useState<Set<string>>(new Set());
   const [highlightEdges, setHighlightEdges] = useState<Array<{ source: string; target: string }>>([]);
+  const [viewMode, setViewMode] = useState<"graph" | "map">("graph");
 
   const toggleFilter = (type: NodeType) => {
     setActiveFilters((prev) =>
@@ -62,12 +65,22 @@ const Index = () => {
           </div>
         </div>
         <div className="flex items-center gap-2">
+          <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as "graph" | "map")}>
+            <TabsList className="h-7">
+              <TabsTrigger value="graph" className="h-6 text-[10px] px-2 gap-1">
+                <Network className="h-3 w-3" /> Graph
+              </TabsTrigger>
+              <TabsTrigger value="map" className="h-6 text-[10px] px-2 gap-1">
+                <Map className="h-3 w-3" /> Map
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
           <div className="relative">
             <Search className="absolute left-2 top-1/2 h-3 w-3 -translate-y-1/2 text-muted-foreground" />
             <Input
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Filter graph..."
+              placeholder="Filter..."
               className="h-7 w-48 pl-7 text-xs"
             />
           </div>
@@ -110,26 +123,35 @@ const Index = () => {
       <ResizablePanelGroup direction="horizontal" className="flex-1">
         <ResizablePanel defaultSize={65} minSize={40}>
           <div className="relative h-full">
-            <GraphVisualization
-              highlightNodes={highlightNodes}
-              highlightEdges={highlightEdges}
-              onNodeClick={setSelectedNode}
-              filterTypes={activeFilters.length > 0 ? activeFilters : undefined}
-              searchTerm={searchTerm || undefined}
-            />
-            {/* Legend */}
-            <div className="absolute bottom-3 left-3 flex gap-2 rounded-lg border border-border bg-card/80 px-3 py-2 backdrop-blur-sm">
-              {typeFilters.map(({ type, label }) => (
-                <div key={type} className="flex items-center gap-1 text-[10px] text-muted-foreground">
-                  <div className="h-2 w-2 rounded-full" style={{ backgroundColor: nodeColors[type] }} />
-                  {label}
+            {viewMode === "graph" ? (
+              <>
+                <GraphVisualization
+                  highlightNodes={highlightNodes}
+                  highlightEdges={highlightEdges}
+                  onNodeClick={setSelectedNode}
+                  filterTypes={activeFilters.length > 0 ? activeFilters : undefined}
+                  searchTerm={searchTerm || undefined}
+                />
+                {/* Legend */}
+                <div className="absolute bottom-3 left-3 flex gap-2 rounded-lg border border-border bg-card/80 px-3 py-2 backdrop-blur-sm">
+                  {typeFilters.map(({ type, label }) => (
+                    <div key={type} className="flex items-center gap-1 text-[10px] text-muted-foreground">
+                      <div className="h-2 w-2 rounded-full" style={{ backgroundColor: nodeColors[type] }} />
+                      {label}
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            {selectedNode && (
-              <div className="absolute bottom-0 left-0 right-0">
-                <NodeDetailPanel node={selectedNode} onClose={() => setSelectedNode(null)} />
-              </div>
+                {selectedNode && (
+                  <div className="absolute bottom-0 left-0 right-0">
+                    <NodeDetailPanel node={selectedNode} onClose={() => setSelectedNode(null)} />
+                  </div>
+                )}
+              </>
+            ) : (
+              <MapVisualization
+                filterTypes={activeFilters.length > 0 ? activeFilters : undefined}
+                searchTerm={searchTerm || undefined}
+              />
             )}
           </div>
         </ResizablePanel>
