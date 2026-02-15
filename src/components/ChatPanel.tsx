@@ -16,10 +16,10 @@ interface Props {
 }
 
 const sampleQuestions = [
-  "Which hospitals in Accra have MRI machines?",
-  "Which doctors work at Korle Bu?",
-  "What equipment does Tamale Teaching Hospital have?",
-  "Which facilities are in the Ashanti region?",
+  "Which hospitals in Accra have MRI scanners?",
+  "What specialties does Aisha Hospital offer?",
+  "Which facilities are in the Northern region?",
+  "Which clinics specialize in ophthalmology?",
 ];
 
 export default function ChatPanel({ onSearchResult }: Props) {
