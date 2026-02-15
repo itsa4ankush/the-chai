@@ -5,6 +5,7 @@ import { rawFacilities, specialtyLabels } from "@/data/rawFacilities";
 import { getFacilityCoordinates } from "@/data/ghanaCoordinates";
 import { Badge } from "@/components/ui/badge";
 import { Building2, MapPin, X } from "lucide-react";
+import DistanceCalculator from "@/components/DistanceCalculator";
 
 interface Props {
   filterTypes?: string[];
@@ -268,6 +269,8 @@ export default function MapVisualization({ filterTypes, searchTerm }: Props) {
           ))}
         </div>
       </div>
+      {/* Distance Calculator */}
+      <DistanceCalculator />
     </div>
   );
 }
