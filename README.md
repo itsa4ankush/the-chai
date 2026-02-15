@@ -1,4 +1,11 @@
-# 🏥 Ghana Healthcare Graph RAG Explorer
+# Welcome to the Chai! 
+
+The Chai, is a simmple attempt to try out few features of the Graph RAG and as I hope to include it it some of the cupoming use cases. Chai is an "appetizer" type of project. 
+
+## Project url: https://graphrag-test.lovable.app/
+
+
+## 🏥 Ghana Healthcare Graph RAG Explorer
 
 An interactive web application that demonstrates **Graph RAG (Retrieval-Augmented Generation)** using a pre-loaded Ghana healthcare dataset. Users can explore a visual knowledge graph, ask natural language questions, and calculate distances between healthcare facilities.
 
