@@ -1,73 +1,153 @@
-# Welcome to your Lovable project
+# 🏥 Ghana Healthcare Graph RAG Explorer
 
-## Project info
+An interactive web application that demonstrates **Graph RAG (Retrieval-Augmented Generation)** using a pre-loaded Ghana healthcare dataset. Users can explore a visual knowledge graph, ask natural language questions, and calculate distances between healthcare facilities.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+> ⚠️ **Disclaimer:** This is a visualization of a sample dataset from one of the **Hack Nation AI** hackathons and is for learning purposes only.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 📋 Project Description
 
-**Use Lovable**
+This project visualizes Ghana's healthcare infrastructure as an interactive knowledge graph, combining graph-based data retrieval with natural language querying. It allows users to explore relationships between healthcare facilities, medical specialties, equipment, and geographic regions across Ghana.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+The Graph RAG approach retrieves relevant subgraph context (nodes and edges) before generating structured answers — making responses grounded in actual data rather than purely generative.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 📊 Dataset
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+The dataset is a curated sample representing Ghana's healthcare ecosystem:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+| Entity Type | Count | Description |
+|-------------|-------|-------------|
+| 🏥 Facilities | ~50 | Hospitals, clinics, health centers, and NGOs across Ghana |
+| 🔬 Specialties | ~30 | Medical specializations offered by facilities |
+| ⚙️ Equipment | ~30 | Medical equipment distributed across facilities |
+| 📍 Regions | 16 | Administrative regions of Ghana |
 
-Follow these steps:
+### Relationships
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+- **located_in** — Facility → Region
+- **has_specialty** — Facility → Specialty
+- **has_equipment** — Facility → Equipment
+- **refers_to** — Facility → Facility (referral networks)
+
+---
+
+## ✨ Key Features
+
+### 🔗 Interactive Knowledge Graph
+- Force-directed graph visualization with color-coded nodes by entity type
+- Click any node to view details and connections
+- Zoom, pan, and filter controls
+- Real-time search and type-based filtering
+
+### 🗺️ Map Visualization
+- Leaflet-based geographic map of healthcare facilities across Ghana
+- Filter by facility type (Hospital, Clinic, NGO) and region
+- Interactive markers with facility details on click
+
+### 📏 Distance Calculator
+- Calculate straight-line distance between any two facilities using the Haversine formula
+- Search facilities from the dataset or enter custom coordinates
+- Direct link to Google Maps for driving directions
+
+### 💬 Graph RAG Q&A Chat
+- Natural language question input (e.g., "Which hospitals in Accra have MRI scanners?")
+- Graph-based retrieval: tokenization → node matching → subgraph retrieval → answer generation
+- Shows traversal statistics (nodes/edges explored, paths found)
+- Highlights relevant subgraph in the visualization
+
+### 📖 How It Works Panel
+- Step-by-step explanation of the Graph RAG pipeline
+- Visual flow diagram: Query → Tokenize → Match → Retrieve → Answer
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| **React 18** | UI framework |
+| **TypeScript** | Type-safe development |
+| **Vite** | Build tool and dev server |
+| **Tailwind CSS** | Utility-first styling |
+| **shadcn/ui** | Accessible UI component library |
+| **react-force-graph-2d** | Force-directed graph visualization |
+| **Leaflet** | Interactive map rendering |
+| **Lucide React** | Icon library |
+| **react-resizable-panels** | Split-pane layout |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ and npm
+
+### Installation
+
+```bash
+# Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
+# Navigate to the project directory
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app will be available at `http://localhost:5173`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## 📁 Project Structure
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```
+src/
+├── components/
+│   ├── ChatPanel.tsx          # Graph RAG Q&A interface
+│   ├── DistanceCalculator.tsx # Facility distance calculator
+│   ├── GraphVisualization.tsx # Force-directed graph view
+│   ├── HowItWorksPanel.tsx    # RAG pipeline explanation
+│   ├── MapVisualization.tsx   # Leaflet map view
+│   ├── NodeDetailPanel.tsx    # Node info sidebar
+│   └── ui/                   # shadcn/ui components
+├── data/
+│   ├── ghanaHealthcare.ts     # Graph nodes and edges
+│   ├── ghanaCoordinates.ts    # Facility coordinates
+│   └── rawFacilities.ts       # Raw facility data
+├── lib/
+│   └── graphSearch.ts         # Graph traversal & search logic
+└── pages/
+    └── Index.tsx              # Main application page
+```
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## 🎓 Learning Objectives
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+This project demonstrates:
+1. **Knowledge Graph Construction** — Structuring real-world data as nodes and edges
+2. **Graph-Based Retrieval** — Traversing graphs to find contextually relevant information
+3. **RAG Pipeline** — Combining retrieval with generation for grounded answers
+4. **Data Visualization** — Rendering complex relationships as interactive graphs and maps
+5. **Geospatial Analysis** — Mapping facilities and calculating distances
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## 📝 License
 
-## Can I connect a custom domain to my Lovable project?
+This project is for educational and demonstration purposes.
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🙏 Acknowledgments
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- **Hack Nation AI** — Hackathon that inspired the dataset
+- **shadcn/ui** — Beautiful, accessible component library
+- **OpenStreetMap** — Map tile provider via Leaflet
