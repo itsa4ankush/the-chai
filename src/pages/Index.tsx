@@ -15,7 +15,7 @@ import type { SearchResult } from "@/lib/graphSearch";
 const typeFilters: { type: NodeType; label: string }[] = [
   { type: "region", label: "Regions" },
   { type: "facility", label: "Facilities" },
-  { type: "doctor", label: "Doctors" },
+  { type: "specialty", label: "Specialties" },
   { type: "equipment", label: "Equipment" },
 ];
 
@@ -42,7 +42,7 @@ const Index = () => {
     return {
       regions: nodes.filter((n) => n.type === "region").length,
       facilities: nodes.filter((n) => n.type === "facility").length,
-      doctors: nodes.filter((n) => n.type === "doctor").length,
+      specialties: nodes.filter((n) => n.type === "specialty").length,
       equipment: nodes.filter((n) => n.type === "equipment").length,
       edges: ghanaHealthcareData.edges.length,
     };
@@ -57,7 +57,7 @@ const Index = () => {
           <div>
             <h1 className="text-sm font-bold text-foreground">Ghana Healthcare Graph RAG</h1>
             <p className="text-[10px] text-muted-foreground">
-              {stats.facilities} facilities · {stats.doctors} doctors · {stats.equipment} equipment · {stats.regions} regions · {stats.edges} relationships
+              {stats.facilities} facilities · {stats.specialties} specialties · {stats.equipment} equipment · {stats.regions} regions · {stats.edges} relationships
             </p>
           </div>
         </div>
