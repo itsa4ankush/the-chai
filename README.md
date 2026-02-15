@@ -1,6 +1,6 @@
 # Welcome to the Chai! 
 
-The Chai, is a simmple attempt to try out few features of the Graph RAG and as I hope to include it it some of the cupoming use cases. Chai is an "appetizer" type of project. 
+The Chai, is a simple attempt to try out few features of the Graph RAG and as I hope to include it it some of the cupoming use cases. Chai is an "appetizer" type of project. 
 
 ## Project url: https://graphrag-test.lovable.app/
 
