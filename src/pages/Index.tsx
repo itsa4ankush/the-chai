@@ -53,6 +53,13 @@ const Index = () => {
 
   return (
     <div className="flex h-screen flex-col bg-background">
+      {/* Disclaimer Banner */}
+      <div className="border-b border-amber-500/30 bg-amber-500/10 px-4 py-2 text-center">
+        <p className="text-xs font-medium text-amber-300">
+          ⚠️ <strong>Disclaimer:</strong> This is a visualization of a sample dataset from one of the{" "}
+          <span className="font-bold text-amber-200">Hack Nation AI</span> hackathons and is for learning purposes only.
+        </p>
+      </div>
       {/* Header */}
       <header className="flex items-center justify-between border-b border-border px-4 py-2">
         <div className="flex items-center gap-3">
